@@ -3,13 +3,13 @@ package config
 import "github.com/spf13/viper"
 
 type Config struct {
-	DBSource    string `mapstructure:"DB_SOURCE" env:"DB_SOURCE" envDefault:"postgresql://postgres@localhost:5432/postgres?sslmode=disable"`
+	DBSource    string `mapstructure:"DB_SOURCE"`
 	GRPCAddress string `mapstructure:"GRPC_ADDRESS" env:"GRPC_ADDRESS" envDefault:"localhost:8080"`
 }
 
 func LoadConfig(path string) (Config, error) {
 	viper.AddConfigPath(path)
-	viper.SetConfigName("config")
+	viper.SetConfigName(".env")
 	viper.SetConfigType("env")
 	viper.AutomaticEnv()
 

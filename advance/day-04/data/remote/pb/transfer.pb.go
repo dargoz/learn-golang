@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.6
 // 	protoc        v6.31.1
-// source: transfer.proto
+// source: proto/transfer.proto
 
 package pb
 
@@ -35,7 +35,7 @@ type Transfer struct {
 
 func (x *Transfer) Reset() {
 	*x = Transfer{}
-	mi := &file_transfer_proto_msgTypes[0]
+	mi := &file_proto_transfer_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -47,7 +47,7 @@ func (x *Transfer) String() string {
 func (*Transfer) ProtoMessage() {}
 
 func (x *Transfer) ProtoReflect() protoreflect.Message {
-	mi := &file_transfer_proto_msgTypes[0]
+	mi := &file_proto_transfer_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -60,7 +60,7 @@ func (x *Transfer) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Transfer.ProtoReflect.Descriptor instead.
 func (*Transfer) Descriptor() ([]byte, []int) {
-	return file_transfer_proto_rawDescGZIP(), []int{0}
+	return file_proto_transfer_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *Transfer) GetId() int64 {
@@ -109,7 +109,7 @@ type TransferRequest struct {
 
 func (x *TransferRequest) Reset() {
 	*x = TransferRequest{}
-	mi := &file_transfer_proto_msgTypes[1]
+	mi := &file_proto_transfer_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -121,7 +121,7 @@ func (x *TransferRequest) String() string {
 func (*TransferRequest) ProtoMessage() {}
 
 func (x *TransferRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_transfer_proto_msgTypes[1]
+	mi := &file_proto_transfer_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -134,7 +134,7 @@ func (x *TransferRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TransferRequest.ProtoReflect.Descriptor instead.
 func (*TransferRequest) Descriptor() ([]byte, []int) {
-	return file_transfer_proto_rawDescGZIP(), []int{1}
+	return file_proto_transfer_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *TransferRequest) GetFromAccountId() int64 {
@@ -168,7 +168,7 @@ type TransferResponse struct {
 
 func (x *TransferResponse) Reset() {
 	*x = TransferResponse{}
-	mi := &file_transfer_proto_msgTypes[2]
+	mi := &file_proto_transfer_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -180,7 +180,7 @@ func (x *TransferResponse) String() string {
 func (*TransferResponse) ProtoMessage() {}
 
 func (x *TransferResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_transfer_proto_msgTypes[2]
+	mi := &file_proto_transfer_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -193,7 +193,7 @@ func (x *TransferResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TransferResponse.ProtoReflect.Descriptor instead.
 func (*TransferResponse) Descriptor() ([]byte, []int) {
-	return file_transfer_proto_rawDescGZIP(), []int{2}
+	return file_proto_transfer_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *TransferResponse) GetTransfer() *Transfer {
@@ -219,7 +219,7 @@ type GetTransferByIDRequest struct {
 
 func (x *GetTransferByIDRequest) Reset() {
 	*x = GetTransferByIDRequest{}
-	mi := &file_transfer_proto_msgTypes[3]
+	mi := &file_proto_transfer_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -231,7 +231,7 @@ func (x *GetTransferByIDRequest) String() string {
 func (*GetTransferByIDRequest) ProtoMessage() {}
 
 func (x *GetTransferByIDRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_transfer_proto_msgTypes[3]
+	mi := &file_proto_transfer_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -244,7 +244,7 @@ func (x *GetTransferByIDRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTransferByIDRequest.ProtoReflect.Descriptor instead.
 func (*GetTransferByIDRequest) Descriptor() ([]byte, []int) {
-	return file_transfer_proto_rawDescGZIP(), []int{3}
+	return file_proto_transfer_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *GetTransferByIDRequest) GetId() int64 {
@@ -263,7 +263,7 @@ type ListTransfersByAccountIDRequest struct {
 
 func (x *ListTransfersByAccountIDRequest) Reset() {
 	*x = ListTransfersByAccountIDRequest{}
-	mi := &file_transfer_proto_msgTypes[4]
+	mi := &file_proto_transfer_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -275,7 +275,7 @@ func (x *ListTransfersByAccountIDRequest) String() string {
 func (*ListTransfersByAccountIDRequest) ProtoMessage() {}
 
 func (x *ListTransfersByAccountIDRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_transfer_proto_msgTypes[4]
+	mi := &file_proto_transfer_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -288,7 +288,7 @@ func (x *ListTransfersByAccountIDRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListTransfersByAccountIDRequest.ProtoReflect.Descriptor instead.
 func (*ListTransfersByAccountIDRequest) Descriptor() ([]byte, []int) {
-	return file_transfer_proto_rawDescGZIP(), []int{4}
+	return file_proto_transfer_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *ListTransfersByAccountIDRequest) GetAccountId() int64 {
@@ -298,11 +298,11 @@ func (x *ListTransfersByAccountIDRequest) GetAccountId() int64 {
 	return 0
 }
 
-var File_transfer_proto protoreflect.FileDescriptor
+var File_proto_transfer_proto protoreflect.FileDescriptor
 
-const file_transfer_proto_rawDesc = "" +
+const file_proto_transfer_proto_rawDesc = "" +
 	"\n" +
-	"\x0etransfer.proto\x12\btransfer\x1a\x1fgoogle/protobuf/timestamp.proto\"\xb9\x01\n" +
+	"\x14proto/transfer.proto\x12\btransfer\x1a\x1fgoogle/protobuf/timestamp.proto\"\xb9\x01\n" +
 	"\bTransfer\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12&\n" +
 	"\x0ffrom_account_id\x18\x02 \x01(\x03R\rfromAccountId\x12\"\n" +
@@ -321,26 +321,25 @@ const file_transfer_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\"@\n" +
 	"\x1fListTransfersByAccountIDRequest\x12\x1d\n" +
 	"\n" +
-	"account_id\x18\x01 \x01(\x03R\taccountId2\x80\x02\n" +
+	"account_id\x18\x01 \x01(\x03R\taccountId2\xa3\x01\n" +
 	"\x0fTransferService\x12G\n" +
 	"\x0eCreateTransfer\x12\x19.transfer.TransferRequest\x1a\x1a.transfer.TransferResponse\x12G\n" +
-	"\x0fGetTransferByID\x12 .transfer.GetTransferByIDRequest\x1a\x12.transfer.Transfer\x12[\n" +
-	"\x18ListTransfersByAccountID\x12).transfer.ListTransfersByAccountIDRequest\x1a\x12.transfer.Transfer0\x01B\aZ\x05./;pbb\x06proto3"
+	"\x0fGetTransferByID\x12 .transfer.GetTransferByIDRequest\x1a\x12.transfer.TransferB\aZ\x05./;pbb\x06proto3"
 
 var (
-	file_transfer_proto_rawDescOnce sync.Once
-	file_transfer_proto_rawDescData []byte
+	file_proto_transfer_proto_rawDescOnce sync.Once
+	file_proto_transfer_proto_rawDescData []byte
 )
 
-func file_transfer_proto_rawDescGZIP() []byte {
-	file_transfer_proto_rawDescOnce.Do(func() {
-		file_transfer_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_transfer_proto_rawDesc), len(file_transfer_proto_rawDesc)))
+func file_proto_transfer_proto_rawDescGZIP() []byte {
+	file_proto_transfer_proto_rawDescOnce.Do(func() {
+		file_proto_transfer_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_proto_transfer_proto_rawDesc), len(file_proto_transfer_proto_rawDesc)))
 	})
-	return file_transfer_proto_rawDescData
+	return file_proto_transfer_proto_rawDescData
 }
 
-var file_transfer_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
-var file_transfer_proto_goTypes = []any{
+var file_proto_transfer_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_proto_transfer_proto_goTypes = []any{
 	(*Transfer)(nil),                        // 0: transfer.Transfer
 	(*TransferRequest)(nil),                 // 1: transfer.TransferRequest
 	(*TransferResponse)(nil),                // 2: transfer.TransferResponse
@@ -348,42 +347,40 @@ var file_transfer_proto_goTypes = []any{
 	(*ListTransfersByAccountIDRequest)(nil), // 4: transfer.ListTransfersByAccountIDRequest
 	(*timestamppb.Timestamp)(nil),           // 5: google.protobuf.Timestamp
 }
-var file_transfer_proto_depIdxs = []int32{
+var file_proto_transfer_proto_depIdxs = []int32{
 	5, // 0: transfer.Transfer.created_at:type_name -> google.protobuf.Timestamp
 	0, // 1: transfer.TransferResponse.transfer:type_name -> transfer.Transfer
 	1, // 2: transfer.TransferService.CreateTransfer:input_type -> transfer.TransferRequest
 	3, // 3: transfer.TransferService.GetTransferByID:input_type -> transfer.GetTransferByIDRequest
-	4, // 4: transfer.TransferService.ListTransfersByAccountID:input_type -> transfer.ListTransfersByAccountIDRequest
-	2, // 5: transfer.TransferService.CreateTransfer:output_type -> transfer.TransferResponse
-	0, // 6: transfer.TransferService.GetTransferByID:output_type -> transfer.Transfer
-	0, // 7: transfer.TransferService.ListTransfersByAccountID:output_type -> transfer.Transfer
-	5, // [5:8] is the sub-list for method output_type
-	2, // [2:5] is the sub-list for method input_type
+	2, // 4: transfer.TransferService.CreateTransfer:output_type -> transfer.TransferResponse
+	0, // 5: transfer.TransferService.GetTransferByID:output_type -> transfer.Transfer
+	4, // [4:6] is the sub-list for method output_type
+	2, // [2:4] is the sub-list for method input_type
 	2, // [2:2] is the sub-list for extension type_name
 	2, // [2:2] is the sub-list for extension extendee
 	0, // [0:2] is the sub-list for field type_name
 }
 
-func init() { file_transfer_proto_init() }
-func file_transfer_proto_init() {
-	if File_transfer_proto != nil {
+func init() { file_proto_transfer_proto_init() }
+func file_proto_transfer_proto_init() {
+	if File_proto_transfer_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_transfer_proto_rawDesc), len(file_transfer_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_transfer_proto_rawDesc), len(file_proto_transfer_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_transfer_proto_goTypes,
-		DependencyIndexes: file_transfer_proto_depIdxs,
-		MessageInfos:      file_transfer_proto_msgTypes,
+		GoTypes:           file_proto_transfer_proto_goTypes,
+		DependencyIndexes: file_proto_transfer_proto_depIdxs,
+		MessageInfos:      file_proto_transfer_proto_msgTypes,
 	}.Build()
-	File_transfer_proto = out.File
-	file_transfer_proto_goTypes = nil
-	file_transfer_proto_depIdxs = nil
+	File_proto_transfer_proto = out.File
+	file_proto_transfer_proto_goTypes = nil
+	file_proto_transfer_proto_depIdxs = nil
 }

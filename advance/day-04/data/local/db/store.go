@@ -9,6 +9,8 @@ import (
 
 type Store interface {
 	TransferTx(ctx context.Context, arg TransferTxParams) (TransferTxResult, error)
+	GetTransferByID(ctx context.Context, id int64) (TransferTxResult, error)
+	CreateAccountTx(ctx context.Context, arg CreateAccountTxParams) (CreateAccountTxResult, error)
 	internal.Querier
 }
 
@@ -25,4 +27,23 @@ func NewStore(db *sql.DB) Store {
 		db:      db,
 		Queries: internal.New(db),
 	}
+}
+
+func (store *SQLStore) execTx(ctx context.Context, fn func(*internal.Queries) error) error {
+	tx, err := store.db.BeginTx(ctx, nil)
+	if err != nil {
+		return err
+	}
+
+	q := internal.New(tx)
+
+	err = fn(q)
+	if err != nil {
+		if rbErr := tx.Rollback(); rbErr != nil {
+			return rbErr
+		}
+		return err
+	}
+
+	return tx.Commit()
 }

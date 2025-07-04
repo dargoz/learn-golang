@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package grpcsimplebank;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "./;pb";
+
+service AccountService {
+    rpc CreateAccount(CreateAccountRequest) returns (CreateAccountResponse);
+    rpc GetAccount(GetAccountRequest) returns (GetAccountResponse);
+    rpc ListAccounts(ListAccountsRequest) returns (ListAccountsResponse);
+}
+
+message CreateAccountRequest {
+    string owner = 1;
+    int64 balance = 2;
+    string currency = 3;
+}
+
+message CreateAccountResponse {
+    int64 id = 1;
+    string owner = 2;
+    int64 balance = 3;
+    string currency = 4;
+    google.protobuf.Timestamp created_at = 5;
+}
+
+message GetAccountRequest {
+    int64 id = 1;
+}
+
+message GetAccountResponse {
+    int64 id = 1;
+    string owner = 2;
+    int64 balance = 3;
+    string currency = 4;
+    string created_at = 5;
+}
+
+message ListAccountsRequest {
+    int32 page_size = 1;
+    int32 page_token = 2;
+}
+message ListAccountsResponse {
+    repeated GetAccountResponse accounts = 1;
+    int32 total_count = 2;
+    int32 page_size = 3;
+    int32 page_token = 4;
+}

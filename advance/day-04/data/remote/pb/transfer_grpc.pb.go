@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v6.31.1
-// source: transfer.proto
+// source: proto/transfer.proto
 
 package pb
 
@@ -19,9 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	TransferService_CreateTransfer_FullMethodName           = "/transfer.TransferService/CreateTransfer"
-	TransferService_GetTransferByID_FullMethodName          = "/transfer.TransferService/GetTransferByID"
-	TransferService_ListTransfersByAccountID_FullMethodName = "/transfer.TransferService/ListTransfersByAccountID"
+	TransferService_CreateTransfer_FullMethodName  = "/transfer.TransferService/CreateTransfer"
+	TransferService_GetTransferByID_FullMethodName = "/transfer.TransferService/GetTransferByID"
 )
 
 // TransferServiceClient is the client API for TransferService service.
@@ -30,7 +29,6 @@ const (
 type TransferServiceClient interface {
 	CreateTransfer(ctx context.Context, in *TransferRequest, opts ...grpc.CallOption) (*TransferResponse, error)
 	GetTransferByID(ctx context.Context, in *GetTransferByIDRequest, opts ...grpc.CallOption) (*Transfer, error)
-	ListTransfersByAccountID(ctx context.Context, in *ListTransfersByAccountIDRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[Transfer], error)
 }
 
 type transferServiceClient struct {
@@ -61,32 +59,12 @@ func (c *transferServiceClient) GetTransferByID(ctx context.Context, in *GetTran
 	return out, nil
 }
 
-func (c *transferServiceClient) ListTransfersByAccountID(ctx context.Context, in *ListTransfersByAccountIDRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[Transfer], error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &TransferService_ServiceDesc.Streams[0], TransferService_ListTransfersByAccountID_FullMethodName, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &grpc.GenericClientStream[ListTransfersByAccountIDRequest, Transfer]{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type TransferService_ListTransfersByAccountIDClient = grpc.ServerStreamingClient[Transfer]
-
 // TransferServiceServer is the server API for TransferService service.
 // All implementations must embed UnimplementedTransferServiceServer
 // for forward compatibility.
 type TransferServiceServer interface {
 	CreateTransfer(context.Context, *TransferRequest) (*TransferResponse, error)
 	GetTransferByID(context.Context, *GetTransferByIDRequest) (*Transfer, error)
-	ListTransfersByAccountID(*ListTransfersByAccountIDRequest, grpc.ServerStreamingServer[Transfer]) error
 	mustEmbedUnimplementedTransferServiceServer()
 }
 
@@ -102,9 +80,6 @@ func (UnimplementedTransferServiceServer) CreateTransfer(context.Context, *Trans
 }
 func (UnimplementedTransferServiceServer) GetTransferByID(context.Context, *GetTransferByIDRequest) (*Transfer, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTransferByID not implemented")
-}
-func (UnimplementedTransferServiceServer) ListTransfersByAccountID(*ListTransfersByAccountIDRequest, grpc.ServerStreamingServer[Transfer]) error {
-	return status.Errorf(codes.Unimplemented, "method ListTransfersByAccountID not implemented")
 }
 func (UnimplementedTransferServiceServer) mustEmbedUnimplementedTransferServiceServer() {}
 func (UnimplementedTransferServiceServer) testEmbeddedByValue()                         {}
@@ -163,17 +138,6 @@ func _TransferService_GetTransferByID_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
-func _TransferService_ListTransfersByAccountID_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(ListTransfersByAccountIDRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(TransferServiceServer).ListTransfersByAccountID(m, &grpc.GenericServerStream[ListTransfersByAccountIDRequest, Transfer]{ServerStream: stream})
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type TransferService_ListTransfersByAccountIDServer = grpc.ServerStreamingServer[Transfer]
-
 // TransferService_ServiceDesc is the grpc.ServiceDesc for TransferService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -190,12 +154,6 @@ var TransferService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _TransferService_GetTransferByID_Handler,
 		},
 	},
-	Streams: []grpc.StreamDesc{
-		{
-			StreamName:    "ListTransfersByAccountID",
-			Handler:       _TransferService_ListTransfersByAccountID_Handler,
-			ServerStreams: true,
-		},
-	},
-	Metadata: "transfer.proto",
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "proto/transfer.proto",
 }

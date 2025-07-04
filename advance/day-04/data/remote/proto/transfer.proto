@@ -36,5 +36,5 @@ message ListTransfersByAccountIDRequest {
 service TransferService {
     rpc CreateTransfer(TransferRequest) returns (TransferResponse);
     rpc GetTransferByID(GetTransferByIDRequest) returns (Transfer);
-    rpc ListTransfersByAccountID(ListTransfersByAccountIDRequest) returns (stream Transfer);
+    // rpc ListTransfersByAccountID(ListTransfersByAccountIDRequest) returns (stream Transfer);
 }

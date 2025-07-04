@@ -13,57 +13,20 @@ type TransferTxParams struct {
 }
 
 type TransferTxResult struct {
-	Transfer internal.Transfer
-}
-
-func (store *SQLStore) execTx(ctx context.Context, fn func(*internal.Queries) error) error {
-	tx, err := store.db.BeginTx(ctx, nil)
-	if err != nil {
-		return err
-	}
-
-	q := internal.New(tx)
-
-	err = fn(q)
-	if err != nil {
-		if rbErr := tx.Rollback(); rbErr != nil {
-			return rbErr
-		}
-		return err
-	}
-
-	return tx.Commit()
-}
-
-func (store *SQLStore) AddAccountBalance(ctx context.Context, arg internal.AddAccountBalanceParams) (internal.Account, error) {
-	row := store.db.QueryRowContext(ctx, internal., arg.ID, arg.Balance)
-	var i internal.Account
-	err := row.Scan(
-		&i.ID,
-		&i.Owner,
-		&i.Balance,
-		&i.Currency,
-		&i.CreatedAt,
-	)
-	return i, err
+	Transfer    internal.Transfer
+	FromAccount internal.Account
+	ToAccount   internal.Account
 }
 
 // TransferTx implements the Store interface.
 func (store *SQLStore) TransferTx(ctx context.Context, arg TransferTxParams) (TransferTxResult, error) {
-	// TODO: implement the transaction logic here
 	var result TransferTxResult
 
 	err := store.execTx(ctx, func(q *internal.Queries) error {
-		// 1. Check if from account exists and is locked
-		fromAccount, err := q.GetAccountForUpdate(ctx, arg.FromAccountID)
-		if err != nil {
+		var err error
 
-		}
-		if fromAccount.Balance < arg.Amount {
-			return internal.ErrInsufficientFunds
-		}
-		// execute create transfer
-		transfer, err := q.CreateTransfer(ctx, internal.CreateTransferParams{
+		// 1. Buat transfer record
+		result.Transfer, err = q.CreateTransfer(ctx, internal.CreateTransferParams{
 			FromAccountID: arg.FromAccountID,
 			ToAccountID:   arg.ToAccountID,
 			Amount:        arg.Amount,
@@ -71,6 +34,57 @@ func (store *SQLStore) TransferTx(ctx context.Context, arg TransferTxParams) (Tr
 		if err != nil {
 			return err
 		}
+
+		// 2. Update saldo dari pengirim
+		result.FromAccount, err = q.AddAccountBalance(ctx, internal.AddAccountBalanceParams{
+			ID:      arg.FromAccountID,
+			Balance: -arg.Amount,
+		})
+		if err != nil {
+			return err
+		}
+
+		// 3. Update saldo ke penerima
+		result.ToAccount, err = q.AddAccountBalance(ctx, internal.AddAccountBalanceParams{
+			ID:      arg.ToAccountID,
+			Balance: arg.Amount,
+		})
+		if err != nil {
+			return err
+		}
+
+		return nil
 	})
-	return TransferTxResult{}, nil
+
+	return result, err
+}
+
+func (store *SQLStore) GetTransferByID(ctx context.Context, id int64) (TransferTxResult, error) {
+	var result TransferTxResult
+
+	error := store.execTx(ctx, func(q *internal.Queries) error {
+		var err error
+
+		result.Transfer, err = q.GetTransfer(ctx, id)
+		if err != nil {
+			return err
+		}
+
+		result.FromAccount, err = q.GetAccount(ctx, result.Transfer.FromAccountID)
+		if err != nil {
+			return err
+		}
+
+		result.ToAccount, err = q.GetAccount(ctx, result.Transfer.ToAccountID)
+		if err != nil {
+			return err
+		}
+
+		return nil
+	})
+
+	if error != nil {
+		return result, error
+	}
+	return result, nil
 }
